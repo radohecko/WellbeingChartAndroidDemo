@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -132,7 +133,9 @@ public class WellbeingChart {
                 colorList.add(Color.parseColor(colors[i]));
             }
 
-            lineChart.setRenderer(new MarkerChartRenderer(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler(), labels, colorList));
+            Typeface typeface = ResourcesCompat.getFont(context, R.font.poppins_regular);
+
+            lineChart.setRenderer(new MarkerChartRenderer(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler(), labels, colorList, typeface));
         }
 
         lineChart.setData(lineData);
@@ -263,12 +266,14 @@ class MarkerChartRenderer extends LineChartRenderer {
     private final LineChart lineChart;
     private final List<String> labels;
     private final ArrayList<Integer> colors;
+    private final Typeface typeface;
 
-    public MarkerChartRenderer(LineChart chart, ChartAnimator animator, ViewPortHandler viewPortHandler, List<String> labels, ArrayList<Integer> colors) {
+    public MarkerChartRenderer(LineChart chart, ChartAnimator animator, ViewPortHandler viewPortHandler, List<String> labels, ArrayList<Integer> colors, Typeface typeface) {
         super(chart, animator, viewPortHandler);
         this.lineChart = chart;
         this.labels = labels;
         this.colors = colors;
+        this.typeface = typeface;
     }
 
     @Override
@@ -328,7 +333,8 @@ class MarkerChartRenderer extends LineChartRenderer {
                 holePaint.setColor(colors.get(2));
             }
 
-            paint.setTextSize(28);
+            paint.setTypeface(typeface);
+            paint.setTextSize(34);
             paint.setStrokeWidth(3);
             paint.setColor(ColorUtil.getWhiteColorWithAlpha(0.4f));
 
@@ -340,11 +346,11 @@ class MarkerChartRenderer extends LineChartRenderer {
             if (entry.getY() < 90) {
                 canvas.drawLine(position[0], position[1], position[0], position[3] + 50, paint);
                 canvas.drawText("" + label[0], position[0] - labelOffset, position[3], paint);
-                canvas.drawText("" + label[1], position[0] - 38, position[3] + 30, paint);
+                canvas.drawText("" + label[1], position[0] - 38, position[3] + 35, paint);
 
             } else {
                 canvas.drawLine(position[0], position[1], position[0], lineChart.getHeight() - 120, paint);
-                canvas.drawText("" + label[0], position[0] - labelOffset, lineChart.getHeight() - 80, paint);
+                canvas.drawText("" + label[0], position[0] - labelOffset, lineChart.getHeight() - 85, paint);
                 canvas.drawText("" + label[1], position[0] - 38, lineChart.getHeight() - 50, paint);
             }
 
