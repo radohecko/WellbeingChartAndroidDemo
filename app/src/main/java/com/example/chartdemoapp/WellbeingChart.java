@@ -164,7 +164,7 @@ public class WellbeingChart {
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(this.isHowdyScoreType ? 5f : 100f);
+        leftAxis.setAxisMaximum(this.isHowdyScoreType ? 5f : 110f);
 
         lineChart.getLegend().setEnabled(false);
         lineChart.setDescription(null);
@@ -194,7 +194,7 @@ public class WellbeingChart {
 
             leftAxis.removeAllLimitLines();
             leftAxis.addLimitLine(limitLine);
-            leftAxis.setAxisMaximum(100f);
+            leftAxis.setAxisMaximum(110f);
             leftAxis.setAxisMinimum(0f);
             leftAxis.setDrawLimitLinesBehindData(false);
         }
