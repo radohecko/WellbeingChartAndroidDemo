@@ -166,12 +166,6 @@ public class WellbeingChart {
         leftAxis.setAxisMinimum(0f);
         leftAxis.setAxisMaximum(this.isHowdyScoreType ? 5f : 100f);
 
-        if (this.enableLeftAxis) {
-            leftAxis.setDrawLabels(false);
-            leftAxis.setGridColor(ColorUtil.getWhiteColorWithAlpha(0f));
-            leftAxis.setAxisLineColor(ColorUtil.getWhiteColorWithAlpha(0f));
-        }
-
         lineChart.getLegend().setEnabled(false);
         lineChart.setDescription(null);
         CustomXAxisRenderer customRenderer = new CustomXAxisRenderer(lineChart.getViewPortHandler(), xAxis, lineChart.getTransformer(YAxis.AxisDependency.LEFT));
@@ -188,6 +182,10 @@ public class WellbeingChart {
         lineChart.setDoubleTapToZoomEnabled(false);
 
         if (this.enableLeftAxis) {
+            leftAxis.setDrawLabels(false);
+            leftAxis.setGridColor(ColorUtil.getWhiteColorWithAlpha(0f));
+            leftAxis.setAxisLineColor(ColorUtil.getWhiteColorWithAlpha(0f));
+
             LimitLine limitLine = new LimitLine(50f);
             limitLine.setLineWidth(3f);
             limitLine.setLineColor(ColorUtil.getWhiteColorWithAlpha(0.4f));
